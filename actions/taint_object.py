@@ -29,7 +29,8 @@ class Taint(action.TerraformBaseAction):
 				resource,
 				state=state_file_path,
 				allow_missing=IsFlagged if allow_missing else IsNotFlagged,
-				capture_output=False
+				capture_output=False,
+				no_color=IsFlagged
 			)
 			if isinstance(_cmd_stdout, str):
 				stdout += _cmd_stdout
