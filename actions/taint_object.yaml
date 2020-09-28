@@ -5,26 +5,31 @@ description: "Taint a list of resources to be marked for recreation"
 enabled: true
 entry_point: "taint_object.py"
 parameters:
+  target_resources:
+    type: "array"
+    description: "List of resources to taint"
+    required: true
+    items:
+      type: string
+    position: 0
+  allow_missing:
+    type: "boolean"
+    description: "If specified, the command will succeed (exit code 0) even if the resource is missing."
+    required: false
+    position: 1
   plan_path:
     type: "string"
     description: "Path of the terraform plan"
     required: true
+    position: 2
   state_file_path:
     type: "string"
     description: "Path of terraform state file"
     required: false
-  target_resources:
-    type: "array"
-    description: "List of resources to taint"
-    required: false
-    items:
-      type: string
+    position: 3
   terraform_exec:
     type: "string"
     description: "Terraform executable path (default: terraform in the $PATH)"
     required: false
     default: "terraform"
-  allow_missing:
-    type: "boolean"
-    description: "If specified, the command will succeed (exit code 0) even if the resource is missing."
-    required: false
+    position: 4
