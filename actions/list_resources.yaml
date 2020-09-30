@@ -22,3 +22,7 @@ parameters:
     type: "string"
     description: "Target address to filter list by"
     required: false
+  target_id:
+    type: "string"
+    description: "Hypervisor object id to filter the list on"
+    required: false

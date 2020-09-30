@@ -3,7 +3,7 @@ from lib import action
 
 
 class ListResources(action.TerraformBaseAction):
-	def run(self, plan_path, state_file_path, terraform_exec, target_address):
+	def run(self, plan_path, state_file_path, terraform_exec, target_address, target_id):
 		"""
 		List Terraform resources
 
@@ -12,6 +12,7 @@ class ListResources(action.TerraformBaseAction):
 		- state_file_path: path of the Terraform state file
 		- terraform_exec: path of the Terraform bin
 		- target_address: filter list by address space
+		- target_id: hypervisor object id to filter the list on
 
 		Returns:
 		- list: List of state resources
@@ -23,6 +24,8 @@ class ListResources(action.TerraformBaseAction):
 		args = ['list', '-no-color']
 		if target_address:
 			args.append(target_address)
+		if target_id:
+			args.append('-id={}'.format(target_id))
 
 		return_code, stdout, stderr = self.terraform.state_cmd(*args)
 
